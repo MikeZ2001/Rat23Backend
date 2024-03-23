@@ -1,8 +1,6 @@
 package com.ratatouille23.Ratatouille23Server.service;
 
-import com.ratatouille23.Ratatouille23Server.model.Category;
 import com.ratatouille23.Ratatouille23Server.model.Product;
-import com.ratatouille23.Ratatouille23Server.model.Table;
 import com.ratatouille23.Ratatouille23Server.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +39,7 @@ public class ProductService {
         productUpdate.setName(product.getName());
         productUpdate.setDescription(product.getDescription());
         productUpdate.setPrice(product.getPrice());
-        productUpdate.setCategoryOfTheProduct(product.getCategoryOfTheProduct());
+        productUpdate.setCategoryOfTheProduct(product.getCategory());
         productUpdate.setAllergens(product.getAllergens());
 
         return productRepository.save(productUpdate);

@@ -78,12 +78,12 @@ public class EmployeeService {
     }
 
     private void wipeData(Employee employee){
-        List<Table> tables = tableRepository.getAllTablesOfStore(employee.getStore().getId()).orElse(null);
+        List<StoreTable> storeTables = tableRepository.getAllTablesOfStore(employee.getStore().getId()).orElse(null);
         List<Category> categories = categoryRepository.getCategoriesOfStore(employee.getStore().getId()).orElse(null);
         List<Order> orders = new ArrayList<>();
-        if (tables != null)
-            for (Table table : tables){
-                orders.addAll(orderRepository.getAllOrdersOfTable(table.getId()).orElse(null));
+        if (storeTables != null)
+            for (StoreTable storeTable : storeTables){
+                orders.addAll(orderRepository.getAllOrdersOfTable(storeTable.getId()).orElse(null));
             }
         List<OrderItem> orderItems = new ArrayList<>();
         if (orders != null && orders.size() != 0)
@@ -109,9 +109,9 @@ public class EmployeeService {
             for (Category category : categories){
                 categoryRepository.deleteById(category.getId());
             }
-        if (tables != null)
-            for (Table table : tables){
-                tableRepository.deleteById(table.getId());
+        if (storeTables != null)
+            for (StoreTable storeTable : storeTables){
+                tableRepository.deleteById(storeTable.getId());
             }
         employeeRepository.deleteById(employee.getId());
         storeRepository.deleteById(employee.getStore().getId());

@@ -2,7 +2,6 @@ package com.ratatouille23.Ratatouille23Server.service;
 
 import com.ratatouille23.Ratatouille23Server.model.OrderItem;
 import com.ratatouille23.Ratatouille23Server.repository.OrderItemRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderItemService {
@@ -51,8 +51,12 @@ public class OrderItemService {
     }
 
     @PutMapping
-    public void updateOrderItem(Long id, OrderItem orderItem) {
-        orderItemRepository.updateOrderItem(Long.valueOf(orderItem.getQuantity()),id,orderItem.getOrderItemStatus());
+    public OrderItem updateOrderItem(Long id, OrderItem orderItem) {
+        OrderItem updateOrderItem = orderItemRepository.findById(id)
+                .orElseThrow(()-> new IllegalStateException("L ordine con id "+id +" non esiste"));
+        updateOrderItem = orderItem;
+
+        return orderItemRepository.save(updateOrderItem);
     }
 
     @PutMapping

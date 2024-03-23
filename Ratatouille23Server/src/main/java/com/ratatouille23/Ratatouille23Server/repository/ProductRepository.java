@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    @Query("SELECT prod FROM Product prod JOIN Category cat WHERE prod.categoryOfTheProduct.id=?1 AND cat.store.id = ?2")
+    @Query("SELECT prod FROM Product prod JOIN Category cat WHERE prod.category.id=?1 AND cat.store.id = ?2")
     Optional<List<Product>> getAllProductByCategoryId(Long id, Long storeId);
 
-    @Query("SELECT prod FROM Product prod JOIN Category cat ON cat.id = prod.categoryOfTheProduct WHERE cat.store.id=?1")
+    @Query("SELECT prod FROM Product prod JOIN Category cat ON cat.id = prod.category.id WHERE cat.store.id=?1")
     Optional<List<Product>> getAllProductsOfStore(Long id);
 }

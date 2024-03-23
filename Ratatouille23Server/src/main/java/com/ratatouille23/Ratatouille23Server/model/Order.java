@@ -1,13 +1,11 @@
 package com.ratatouille23.Ratatouille23Server.model;
 
-import com.fasterxml.jackson.annotation.*;
 import com.ratatouille23.Ratatouille23Server.model.enumeration.Status;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -28,7 +26,7 @@ public class Order {
     private String notes;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    private com.ratatouille23.Ratatouille23Server.model.Table table;
+    private StoreTable storeTable;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Employee> employeesOfTheOrder;
@@ -84,12 +82,12 @@ public class Order {
         this.notes = notes;
     }
 
-    public com.ratatouille23.Ratatouille23Server.model.Table getTable() {
-        return table;
+    public StoreTable getTable() {
+        return storeTable;
     }
 
-    public void setTable(com.ratatouille23.Ratatouille23Server.model.Table table) {
-        this.table = table;
+    public void setTable(StoreTable storeTable) {
+        this.storeTable = storeTable;
     }
 
     public List<Employee> getEmployeesOfTheOrder() {

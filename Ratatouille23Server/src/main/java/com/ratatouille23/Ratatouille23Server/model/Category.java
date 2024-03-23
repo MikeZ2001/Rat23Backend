@@ -21,7 +21,7 @@ public class Category {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Product> productsOfTheCategory; //Products in this category
+    private List<Product> products; //Products in this category
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Store store; //Store where the category is
@@ -50,12 +50,12 @@ public class Category {
         this.description = description;
     }
 
-    public List<Product> getProductsOfTheCategory() {
-        return productsOfTheCategory;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProductsOfTheCategory(List<Product> productsOfTheCategory) {
-        this.productsOfTheCategory = productsOfTheCategory;
+    public void setProductsOfTheCategory(List<Product> products) {
+        this.products = products;
     }
 
     public Store getStore() {
@@ -84,7 +84,7 @@ public class Category {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", productsOfTheCategory=" + productsOfTheCategory +
+                ", productsOfTheCategory=" + products +
                 ", store=" + store +
                 '}';
     }

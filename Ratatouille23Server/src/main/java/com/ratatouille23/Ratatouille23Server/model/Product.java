@@ -22,13 +22,10 @@ public class Product {
     private String description;
     @Nonnull
     private double price;
-
-    @Type(ListArrayType.class)
-    @Column(name = "Allergens", columnDefinition = "VARCHAR(255)")
-    private List<String> allergens;
+    private String allergens;
 
     @ManyToOne
-    private Category categoryOfTheProduct; //Category of this product
+    private Category category; //Category of this product
 
     public Long getId() {
         return id;
@@ -62,19 +59,19 @@ public class Product {
         this.price = price;
     }
 
-    public Category getCategoryOfTheProduct() {
-        return categoryOfTheProduct;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryOfTheProduct(Category categoryOfTheProduct) {
-        this.categoryOfTheProduct = categoryOfTheProduct;
+    public void setCategoryOfTheProduct(Category category) {
+        this.category = category;
     }
 
-    public List<String> getAllergens() {
+    public String getAllergens() {
         return allergens;
     }
 
-    public void setAllergens(List<String> allergens) {
+    public void setAllergens(String allergens) {
         this.allergens = allergens;
     }
 
@@ -99,7 +96,7 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", allergens=" + allergens +
-                ", categoryOfTheProduct=" + categoryOfTheProduct +
+                ", categoryOfTheProduct=" + category +
                 '}';
     }
 }

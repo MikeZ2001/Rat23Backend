@@ -1,6 +1,6 @@
 package com.ratatouille23.Ratatouille23Server.service;
 
-import com.ratatouille23.Ratatouille23Server.model.Table;
+import com.ratatouille23.Ratatouille23Server.model.StoreTable;
 import com.ratatouille23.Ratatouille23Server.repository.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,28 +22,28 @@ public class TableService {
     }
 
     @GetMapping
-    public List<Table> getAllTables() {
+    public List<StoreTable> getAllTables() {
         return tableRepository.findAll();
     }
 
     @GetMapping
-    public List<Table> getAllAvailableTables(Long storeId) throws IllegalStateException{
-        List<Table> optionalTables = tableRepository.getAllAvailableTableOfStore(storeId)
+    public List<StoreTable> getAllAvailableTables(Long storeId) throws IllegalStateException{
+        List<StoreTable> optionalStoreTables = tableRepository.getAllAvailableTableOfStore(storeId)
                 .orElseThrow(()-> new IllegalStateException("Impossibile trovare i tavoli disponibili dell'attività con id " + storeId + "."));
-        return optionalTables;
+        return optionalStoreTables;
     }
 
     @GetMapping
-    public Table getTableById(Long id) throws IllegalStateException{
-        Table optionalTable = tableRepository.findById(id)
+    public StoreTable getTableById(Long id) throws IllegalStateException{
+        StoreTable optionalStoreTable = tableRepository.findById(id)
                 .orElseThrow(()->new IllegalStateException("Il tavolo con id " + id + " non esiste."));
 
-        return optionalTable;
+        return optionalStoreTable;
     }
 
     @PostMapping
-    public Table addTable(Table table) {
-        return tableRepository.save(table);
+    public StoreTable addTable(StoreTable storeTable) {
+        return tableRepository.save(storeTable);
     }
 
     @DeleteMapping
@@ -52,20 +52,21 @@ public class TableService {
     }
 
     @PutMapping
-    public Table updateTable(Long id, Table table) throws IllegalStateException{
-        Table updateTable = tableRepository.findById(id)
+    public StoreTable updateTable(Long id, StoreTable storeTable) throws IllegalStateException{
+        StoreTable updateStoreTable = tableRepository.findById(id)
                 .orElseThrow(()->new IllegalStateException("Il tavolo con id " + id + " non esiste."));
 
-        updateTable.setName(table.getName());
-        updateTable.setSeatsNumber(table.getSeatsNumber());
-        updateTable.setAvailable(table.getAvailable());
+        updateStoreTable.setName(storeTable.getName());
+        updateStoreTable.setSeatsNumber(storeTable.getSeatsNumber());
+        updateStoreTable.setAvailable(storeTable.getAvailable());
+        updateStoreTable.setStore(storeTable.getStore());
 
-       return tableRepository.save(updateTable);
+       return tableRepository.save(updateStoreTable);
     }
 
-    public List<Table> getAllByStore(Long id) throws IllegalStateException{
-        List<Table> optionalTables = tableRepository.getAllTablesOfStore(id)
+    public List<StoreTable> getAllByStore(Long id) throws IllegalStateException{
+        List<StoreTable> optionalStoreTables = tableRepository.getAllTablesOfStore(id)
                 .orElseThrow(()-> new IllegalStateException("Impossibile trovare i tavoli dell'attività con id " + id + "."));
-        return optionalTables;
+        return optionalStoreTables;
     }
 }

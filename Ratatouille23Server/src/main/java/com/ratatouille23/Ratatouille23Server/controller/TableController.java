@@ -1,6 +1,6 @@
 package com.ratatouille23.Ratatouille23Server.controller;
 
-import com.ratatouille23.Ratatouille23Server.model.Table;
+import com.ratatouille23.Ratatouille23Server.model.StoreTable;
 import com.ratatouille23.Ratatouille23Server.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,17 +22,17 @@ public class TableController {
 
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Table>> getAllTables(){
-        List<Table> tables = tableService.getAllTables();
+    public ResponseEntity<List<StoreTable>> getAllTables(){
+        List<StoreTable> storeTables = tableService.getAllTables();
 
-        return new ResponseEntity<>(tables, HttpStatus.OK);
+        return new ResponseEntity<>(storeTables, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Table>addTable(@RequestBody Table table){
-        Table newTable = tableService.addTable(table);
+    public ResponseEntity<StoreTable>addTable(@RequestBody StoreTable storeTable){
+        StoreTable newStoreTable = tableService.addTable(storeTable);
 
-        return new ResponseEntity<>(newTable,HttpStatus.CREATED);
+        return new ResponseEntity<>(newStoreTable,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{tableId}")
@@ -44,10 +44,10 @@ public class TableController {
     }
 
     @PutMapping("/update/{tableId}")
-    public ResponseEntity<?> updateTable(@PathVariable("tableId") Long id,@RequestBody Table table){
+    public ResponseEntity<?> updateTable(@PathVariable("tableId") Long id,@RequestBody StoreTable storeTable){
         try {
-            Table updatedTable = tableService.updateTable(id,table);
-            return new ResponseEntity<>(updatedTable,HttpStatus.OK);
+            StoreTable updatedStoreTable = tableService.updateTable(id, storeTable);
+            return new ResponseEntity<>(updatedStoreTable,HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -56,8 +56,8 @@ public class TableController {
     @GetMapping("/getAllAvailableTables/{storeId}")
     public ResponseEntity<?> getTables(@PathVariable("storeId") Long id){
         try {
-            List<Table> tables = tableService.getAllAvailableTables(id);
-            return new ResponseEntity<>(tables, HttpStatus.OK);
+            List<StoreTable> storeTables = tableService.getAllAvailableTables(id);
+            return new ResponseEntity<>(storeTables, HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -66,8 +66,8 @@ public class TableController {
     @GetMapping("/getById/{tableId}")
     public ResponseEntity<?> getTableById(@PathVariable("tableId") Long id){
         try {
-            Table table = tableService.getTableById(id);
-            return new ResponseEntity<>(table,HttpStatus.OK);
+            StoreTable storeTable = tableService.getTableById(id);
+            return new ResponseEntity<>(storeTable,HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -76,8 +76,8 @@ public class TableController {
     @GetMapping("/getAllByStore/{storeId}")
     public ResponseEntity<?> getAllByStoreId(@PathVariable("storeId") Long id){
         try {
-            List<Table> tables = tableService.getAllByStore(id);
-            return new ResponseEntity<>(tables, HttpStatus.OK);
+            List<StoreTable> storeTables = tableService.getAllByStore(id);
+            return new ResponseEntity<>(storeTables, HttpStatus.OK);
         } catch (IllegalStateException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

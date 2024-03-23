@@ -1,4 +1,5 @@
 package com.ratatouille23.Ratatouille23Server.controller;
+import com.ratatouille23.Ratatouille23Server.model.Order;
 import com.ratatouille23.Ratatouille23Server.model.OrderItem;
 import com.ratatouille23.Ratatouille23Server.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/orderItem")
@@ -53,10 +55,11 @@ public class OrderItemController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateOrderItem(@PathVariable("id") Long id,@RequestBody OrderItem orderItem){
-        orderItemService.updateOrderItem(id,orderItem);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> updateOrderItem(@PathVariable("id") Long id,@RequestBody OrderItem orderItem){
+        OrderItem updatedOrderItem = orderItemService.updateOrderItem(id,orderItem);
+        return new ResponseEntity<>(updatedOrderItem, HttpStatus.OK);
     }
 
 

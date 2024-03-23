@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@jakarta.persistence.Table(name = "RestaurantTable")
-public class Table {
+public class StoreTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +18,7 @@ public class Table {
     @Nonnull
     private Boolean available;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Store store;
 
     public Long getId() {
@@ -73,8 +72,8 @@ public class Table {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Table table)) return false;
-        return id.equals(table.id);
+        if (!(o instanceof StoreTable storeTable)) return false;
+        return id.equals(storeTable.id);
     }
 
     @Override

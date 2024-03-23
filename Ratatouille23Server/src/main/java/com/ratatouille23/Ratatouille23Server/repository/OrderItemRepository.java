@@ -1,5 +1,6 @@
 package com.ratatouille23.Ratatouille23Server.repository;
 
+import com.ratatouille23.Ratatouille23Server.model.Order;
 import com.ratatouille23.Ratatouille23Server.model.OrderItem;
 import com.ratatouille23.Ratatouille23Server.model.enumeration.OrderItemStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,10 +23,6 @@ public interface OrderItemRepository extends JpaRepository<OrderItem,Long> {
 
     @Query("update OrderItem orderItem SET orderItem.quantity =?2 where orderItem.id = ?1")
     Optional<?> updateQuantity(Long id,Long quantity);
-
-    @Modifying(clearAutomatically = true)
-    @Query("update OrderItem orderItem SET orderItem.quantity =?1 , orderItem.orderItemStatus =?3 where orderItem.id = ?2")
-    void updateOrderItem(Long quantity, Long id,OrderItemStatus orderItemStatus);
 
     @Modifying(clearAutomatically = true)
     @Query("update OrderItem orderItem SET orderItem.orderItemStatus =?1 where orderItem.id = ?2")
