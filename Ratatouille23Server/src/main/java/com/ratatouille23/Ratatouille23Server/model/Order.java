@@ -1,5 +1,6 @@
 package com.ratatouille23.Ratatouille23Server.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ratatouille23.Ratatouille23Server.model.enumeration.Status;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
@@ -31,6 +32,7 @@ public class Order {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Employee> employeesOfTheOrder;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
 

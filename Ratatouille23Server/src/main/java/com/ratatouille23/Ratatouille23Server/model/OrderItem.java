@@ -24,6 +24,7 @@ public class OrderItem{
     @ManyToOne(optional = false)
     private Product product; //Product used in this order item
 
+    @JsonBackReference
     @ManyToOne
     private Order order; //Order of this order item
 
