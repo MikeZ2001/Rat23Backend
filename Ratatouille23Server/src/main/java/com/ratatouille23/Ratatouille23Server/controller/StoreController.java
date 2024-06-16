@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "api/v1/store")
 public class StoreController {
 
-    @Autowired
-    private StoreService storeService;
+    private final StoreService storeService;
 
+    @Autowired
     public StoreController(StoreService storeService) {
         this.storeService = storeService;
     }

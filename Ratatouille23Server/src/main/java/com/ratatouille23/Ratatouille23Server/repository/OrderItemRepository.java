@@ -20,7 +20,6 @@ public interface OrderItemRepository extends JpaRepository<OrderItem,Long> {
     @Query("SELECT item FROM OrderItem item where item.id=?1")
     Optional<OrderItem> getOrderItemById(Long id);
 
-
     @Query("update OrderItem orderItem SET orderItem.quantity =?2 where orderItem.id = ?1")
     Optional<?> updateQuantity(Long id,Long quantity);
 

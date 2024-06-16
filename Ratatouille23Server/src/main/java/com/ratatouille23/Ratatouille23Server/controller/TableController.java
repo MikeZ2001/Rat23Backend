@@ -12,14 +12,13 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/v1/table")
 public class TableController {
-
-    @Autowired
+    
     private final TableService tableService;
 
+    @Autowired
     public TableController(TableService tableService){
         this.tableService = tableService;
     }
-
 
     @GetMapping("/getAll")
     public ResponseEntity<List<StoreTable>> getAllTables(){

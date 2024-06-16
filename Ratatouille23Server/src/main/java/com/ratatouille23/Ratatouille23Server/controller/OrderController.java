@@ -14,13 +14,12 @@ import java.util.List;
 @RequestMapping(path = "api/v1/order")
 public class OrderController {
 
-    @Autowired
     private final OrderService orderService;
 
+    @Autowired
     public OrderController(OrderService orderService){
         this.orderService = orderService;
     }
-
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Order>> getAllOrder(){

@@ -15,13 +15,12 @@ import java.util.Objects;
 @RequestMapping(path = "api/v1/employee")
 public class EmployeeController {
 
-    @Autowired
     private final EmployeeService employeeService;
 
+    @Autowired
     public EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
     }
-
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Employee>> getAllEmployee(){

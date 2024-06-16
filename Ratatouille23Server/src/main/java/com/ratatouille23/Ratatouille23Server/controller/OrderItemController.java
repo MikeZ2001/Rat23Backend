@@ -13,9 +13,9 @@ import java.util.Optional;
 @RequestMapping(path = "api/v1/orderItem")
 public class OrderItemController {
 
-    @Autowired
     private final OrderItemService orderItemService;
 
+    @Autowired
     public OrderItemController(OrderItemService orderItemService){
         this.orderItemService = orderItemService;
     }

@@ -14,13 +14,12 @@ import java.util.List;
 @RequestMapping(path = "api/v1/category")
 public class CategoryController {
 
-    @Autowired
     private final CategoryService categoryService;
 
+    @Autowired
     public CategoryController(CategoryService categoryService, ProductService productService){
         this.categoryService = categoryService;
     }
-
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Category>> getAllCategories(){
@@ -39,7 +38,6 @@ public class CategoryController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     @PostMapping("/add")
     public ResponseEntity<Category>addCategory(@RequestBody Category category){
